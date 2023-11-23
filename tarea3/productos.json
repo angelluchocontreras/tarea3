@@ -1,0 +1,20 @@
+[
+	{
+		"title": "manzana",
+		"description": "Manzana roja",
+		"price": 100,
+		"thumbnail": "manzanaroja.jpg",
+		"code": "P1",
+		"stock": 10,
+		"id": 1
+	},
+	{
+		"title": "naranja modificada",
+		"description": "Naranja jugosa y modificada",
+		"price": 150,
+		"thumbnail": "naranja_modificada.jpg",
+		"code": "P2",
+		"stock": 7,
+		"id": 2
+	}
+]

@@ -1,9 +1,9 @@
-import fs from 'fs';
+/*const fs = require('fs');
 
 
 
 
-export class ProductManager {
+class ProductManager {
     constructor(path) {
         this.path = path;
         this.products = [];
@@ -12,14 +12,11 @@ export class ProductManager {
         if (fs.existsSync(this.path)) {
             try {
                 const data = fs.readFileSync(this.path, 'utf-8');
-                if (data.trim() !== '') {  // Verificar si el archivo no está vacío
-                    this.products = JSON.parse(data);
-                }
+                this.products = JSON.parse(data);
             } catch (error) {
                 console.error('Error al cargar los productos desde el archivo:', error);
             }
         }
-        
     }
 
     async saveProducts() {
@@ -34,65 +31,28 @@ export class ProductManager {
     addProduct(product) {
         if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
             console.error('Error: Todos los campos son obligatorios.');
-            return { error: 'Todos los campos son obligatorios.' };
+            return;
         }
-    
+
         if (this.products.some(existingProduct => existingProduct.code === product.code)) {
             console.error('Error: El código ya existe para otro producto.');
-            return { error: 'El código ya existe para otro producto.' };
+            return;
         }
-    
+
         product.id = this.productIdCounter;
         this.productIdCounter++;
         this.products.push(product);
         this.saveProducts();
-        return { product };
     }
-    
+
     updateProduct(id, updatedProduct) {
         const index = this.products.findIndex((product) => product.id === id);
         if (index !== -1) {
             this.products[index] = { ...this.products[index], ...updatedProduct };
             this.saveProducts();
-            return { product: this.products[index] };
-        } else {
-            return { error: 'Producto no encontrado.' };
         }
-    }
-    
-    deleteProduct(id) {
-        const index = this.products.findIndex((product) => product.id === id);
-        if (index !== -1) {
-            const deletedProduct = this.products.splice(index, 1)[0];
-            this.saveProducts();
-            return { product: deletedProduct };
-        } else {
-            return { error: 'Producto no encontrado.' };
-        }
-    }
-
-    getProducts(limit) {
-        if (limit) {
-            return { products: this.products.slice(0, limit) };
-        } else {
-            return { products: this.products };
-        }
-    }
-    
-    getProductById(id) {
-        return this.products.find(product => product.id === id);
-    }
-   
-    
-
-    static getInstance(path) {
-        if (!ProductManager.instance) {
-            ProductManager.instance = new ProductManager(path);
-        }
-        return ProductManager.instance;
     }
 }
-
 
 // Prueba
 const productManager = new ProductManager('./productos.json');
@@ -134,9 +94,14 @@ productManager.updateProduct(2, {
     stock: 7,
 });
 
+console.log('Obteniendo lista de productos después de la actualización');
+console.log(productManager.getProducts());
 
+console.log('Eliminando producto por ID');
+productManager.deleteProduct(2);
 
+console.log('Obteniendo lista de productos después de la eliminación');
+console.log(productManager.getProducts());*/
 
-
-
+///////////////////////////////////////////////////////
 

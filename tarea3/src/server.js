@@ -1,5 +1,7 @@
+// server.js
+
 import express from 'express';
-import ProductManager from './ProductManager';
+import { ProductManager } from './ProductManager.js';
 
 const app = express();
 const PORT = 5000;
@@ -11,10 +13,13 @@ function sendError(res, status, message) {
     res.status(status).json({ error: message });
 }
 
-app.get('/products', async (req, res, next) => {
+
+
+
+app.get('/api/products', async (req, res, next) => {
     try {
         const limit = parseInt(req.query.limit);
-        if (isNaN(limit)) {
+        if (limit && isNaN(limit)) {
             sendError(res, 400, 'El parámetro "limit" debe ser un número válido');
             return;
         }
@@ -27,7 +32,7 @@ app.get('/products', async (req, res, next) => {
     }
 });
 
-app.get('/products/:pid', async (req, res, next) => {
+app.get('/api/products/:pid', async (req, res, next) => {
     try {
         const productId = parseInt(req.params.pid);
         const product = await productManager.getProductById(productId);
@@ -38,6 +43,40 @@ app.get('/products/:pid', async (req, res, next) => {
         }
     } catch (error) {
         console.error('Error al obtener producto:', error);
+        next(error);
+    }
+});
+
+app.post('/api/products', async (req, res, next) => {
+    try {
+        const newProduct = req.body;
+        productManager.addProduct(newProduct);
+        res.json({ status: 'Producto agregado correctamente' });
+    } catch (error) {
+        console.error('Error al agregar producto:', error);
+        next(error);
+    }
+});
+
+app.put('/api/products/:pid', async (req, res, next) => {
+    try {
+        const productId = parseInt(req.params.pid);
+        const updatedProduct = req.body;
+        productManager.updateProduct(productId, updatedProduct);
+        res.json({ status: 'Producto actualizado correctamente' });
+    } catch (error) {
+        console.error('Error al actualizar producto:', error);
+        next(error);
+    }
+});
+
+app.delete('/api/products/:pid', async (req, res, next) => {
+    try {
+        const productId = parseInt(req.params.pid);
+        productManager.deleteProduct(productId);
+        res.json({ status: 'Producto eliminado correctamente' });
+    } catch (error) {
+        console.error('Error al eliminar producto:', error);
         next(error);
     }
 });
