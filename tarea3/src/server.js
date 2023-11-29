@@ -1,20 +1,16 @@
-// server.js
 
 import express from 'express';
 import { ProductManager } from './ProductManager.js';
+import cartRouter from './router/CartRouter.js'; 
 
 const app = express();
 const PORT = 5000;
 const productManager = new ProductManager('./productos.json');
 
 app.use(express.json());
-
 function sendError(res, status, message) {
     res.status(status).json({ error: message });
 }
-
-
-
 
 app.get('/api/products', async (req, res, next) => {
     try {
@@ -80,6 +76,8 @@ app.delete('/api/products/:pid', async (req, res, next) => {
         next(error);
     }
 });
+
+app.use('/api/cart', cartRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

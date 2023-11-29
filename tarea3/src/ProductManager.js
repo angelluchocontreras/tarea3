@@ -12,7 +12,7 @@ export class ProductManager {
         if (fs.existsSync(this.path)) {
             try {
                 const data = fs.readFileSync(this.path, 'utf-8');
-                if (data.trim() !== '') {  // Verificar si el archivo no está vacío
+                if (data.trim() !== '') { 
                     this.products = JSON.parse(data);
                 }
             } catch (error) {
@@ -94,7 +94,6 @@ export class ProductManager {
 }
 
 
-// Prueba
 const productManager = new ProductManager('./productos.json');
 
 console.log('Agregando manzana');
