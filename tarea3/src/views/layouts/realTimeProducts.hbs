@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Products</title>
+</head>
+<body>
+  <h1>Lista de Productos en Tiempo Real</h1>
+  <ul>
+    {{#each products}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+
+  <form id="formularioProducto">
+    <label for="nombreProducto">Nombre del Producto:</label>
+    <input type="text" id="nombreProducto" name="nombreProducto" required>
+    <button type="button" onclick="agregarProducto()">Agregar Producto</button>
+  </form>
+
+  <script>
+    function agregarProducto() {
+      const nombreProducto = document.getElementById('nombreProducto').value;
+      socket.emit('nuevoProducto', { nombre: nombreProducto });
+    }
+  </script>
+</body>
+</html>

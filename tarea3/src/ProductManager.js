@@ -94,45 +94,6 @@ export class ProductManager {
 }
 
 
-const productManager = new ProductManager('./productos.json');
-
-console.log('Agregando manzana');
-productManager.addProduct({
-    title: 'manzana',
-    description: 'Manzana roja',
-    price: 100,
-    thumbnail: 'manzanaroja.jpg',
-    code: 'P1',
-    stock: 10,
-});
-
-console.log('Agregando naranja');
-productManager.addProduct({
-    title: 'naranja',
-    description: 'Naranja jugosa',
-    price: 120,
-    thumbnail: 'naranja.jpg',
-    code: 'P2',
-    stock: 5,
-});
-
-console.log('Obteniendo lista de productos');
-console.log(productManager.getProducts());
-
-console.log('Obteniendo producto por ID');
-console.log(productManager.getProductById(2));
-
-console.log('Actualizando producto por ID');
-productManager.updateProduct(2, {
-    id: 2,
-    title: 'naranja modificada',
-    description: 'Naranja jugosa y modificada',
-    price: 150,
-    thumbnail: 'naranja_modificada.jpg',
-    code: 'P2',
-    stock: 7,
-});
-
 
 
 

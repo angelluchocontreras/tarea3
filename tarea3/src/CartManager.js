@@ -26,14 +26,20 @@ class CartManager {
         }
     }
 
-    addCart(cart) {
-        cart.id = this.generateCartId();
-        cart.products = [];
-        this.carts.push(cart);
-        this.saveCarts();
-        return cart;
+    addCart() {
+        try {
+            const cart = {
+                id: this.generateCartId(),
+                products: []
+            };
+            this.carts.push(cart);
+            this.saveCarts();
+            return cart;
+        } catch (error) {
+            console.log(error);
+        }
     }
-
+    
     getCartById(cartId) {
         return this.carts.find(cart => cart.id === cartId);
     }
